@@ -29,8 +29,8 @@ const UserSignup = () => {
     }
     // newUser down is sent as the request body
     const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`, newUser)
-
-    if(response.status ===201){
+    console.log(response)
+    if(response.status === 201){
       const data = response.data
       setUser(data.user)
       localStorage.setItem('token', data.token)
@@ -42,8 +42,6 @@ const UserSignup = () => {
     setLastName('');
     setPassword('');
   }
-
-
 
   return (
     <div className='p-7 h-screen flex flex-col justify-between'>
@@ -66,7 +64,7 @@ const UserSignup = () => {
             }} />
             <input
             required
-            className='bg-[#eeeeee] w-1/2 roundedlg px-4 py-2 text-lg placeholder:text-base'
+            className='bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 text-lg placeholder:text-base'
             type="text"
             placeholder='Last Name'
             value={lastName}

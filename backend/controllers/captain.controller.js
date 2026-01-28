@@ -12,7 +12,7 @@ module.exports.registerCaptain = async (req, res, next) =>{
   }
 
   const {fullname, email, password, vehicle} = req.body;
-  
+  console.log(req.body)
   const isCaptainAlreadyExist = await captainModel.findOne({email});
 
   if (isCaptainAlreadyExist) {
@@ -57,7 +57,7 @@ module.exports.loginCaptain = async (req, res, next) =>{
     return res.status(401).json({message: 'Invalid email or password'});
   }
 
-  const token = captain.genrerateAuthToken();
+  const token = captain.generateAuthToken();
   
   res.cookie('token', token);
 
