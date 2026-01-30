@@ -7,27 +7,35 @@ import { CaptainDataContext } from '../context/CaptainContext'
 const CaptainSignup = () => {
 
   const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [firstName, setFirstName] = useState('')
-    const [lastName, setLastName] = useState('')
-    const [captainData, setCaptainData] = useState({})
+  const [password, setPassword] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [ vehicleColor, setVehicleColor ] = useState('')
+  const [ vehiclePlate, setVehiclePlate ] = useState('')
+  const [ vehicleCapacity, setVehicleCapacity ] = useState('')
+  const [ vehicleType, setVehicleType ] = useState('')
+  const [captainData, setCaptainData] = useState({})
+
+  const submitHandler = (e)=> {
+    e.preventDefault();
+    setCaptainData({
+      username:{
+       firstName:firstName,
+       lastName:lastName,
+      },
+      email:email,
+      password:password
+    })
   
-    const submitHandler = (e)=> {
-      e.preventDefault();
-      setCaptainData({
-        username:{
-         firstName:firstName,
-         lastName:lastName,
-        },
-        email:email,
-        password:password
-      })
-  
-      setEmail('');
-      setFirstName('');
-      setLastName('');
-      setPassword('');
-    }
+    setEmail('');
+    setFirstName('');
+    setLastName('');
+    setPassword('');
+    setVehicleColor('');
+    setVehiclePlate('');
+    setVehicleCapacity('');
+    setVehicleType('');
+  }
 
   return (
     <div className='p-7 h-screen flex flex-col justify-between'>
@@ -80,12 +88,62 @@ const CaptainSignup = () => {
           className='bg-[#eeeeee] mb-7 rounded px-4 py-2 w-full text-lg placeholder:text-base'
           type="Password"
           placeholder='Password' />
+          <h3 className='text-lg font-medium mb-2'>Vehicle Information</h3>
+          <div className='flex gap-4 mb-7'>
+            <input
+              required
+              className='bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border text-lg placeholder:text-base'
+              type="text"
+              placeholder='Vehicle Color'
+              value={vehicleColor}
+              onChange={(e) => {
+                setVehicleColor(e.target.value)
+              }}
+            />
+            <input
+              required
+              className='bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border text-lg placeholder:text-base'
+              type="text"
+              placeholder='Vehicle Plate'
+              value={vehiclePlate}
+              onChange={(e) => {
+                setVehiclePlate(e.target.value)
+              }}
+            />
+          </div>
+          <div className='flex gap-4 mb-7'>
+            <input
+              required
+              className='bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border text-lg placeholder:text-base'
+              type="number"
+              placeholder='Vehicle Capacity'
+              value={vehicleCapacity}
+              onChange={(e) => {
+                setVehicleCapacity(e.target.value)
+              }}
+            />
+            <select
+              required
+              className='bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border text-lg placeholder:text-base'
+              value={vehicleType}
+              onChange={(e) => {
+                setVehicleType(e.target.value)
+              }}
+            >
+              <option value="" disabled>Select Vehicle Type</option>
+              <option value="car">Car</option>
+              <option value="auto">Auto</option>
+              <option value="moto">Moto</option>
+            </select>
+          </div>
+
           <button className='flex items-center justify-center w-full bg-black text-white py-3 rounded-lg mt-5'>Register</button>
+
         </form>
         <p className='text-center mt-3'>Already have a account? <Link className=' px-1 text-blue-600' to='/captain-login'>Login here</Link></p>
       </div>
       <div>
-       <p className='text-[12px]'>To drive with Uber your vehicle must be 1995 or newer, and be a mid-size or full-size sedan that comfortably seats 4-8 passengers.</p>
+       <p className='text-[11px]'>To drive with Uber your vehicle must be 1995 or newer, and be a mid-size or full-size sedan that comfortably seats 4-8 passengers.</p>
       </div>
     </div>
   )
